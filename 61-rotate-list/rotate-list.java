@@ -36,22 +36,23 @@ class Solution {
             temp=temp.next;
         }
         k %= n;
-        
-        ListNode fast=head,slow=head;
-        while(k!=0){
-           fast=fast.next;
-            k--;
-        }
+        if(k!=0 && k!=n)
+        {
+            ListNode cur=head,prev=head;
+            while(k>0){
+            cur=cur.next;
+                k--;
+            }
+                
             
-        
-        while(fast.next!=null){
-            slow=slow.next;
-            fast=fast.next;
+            while(cur.next!=null){
+                prev=prev.next;
+                cur=cur.next;
+            }
+            cur.next=head;
+            head=prev.next;
+            prev.next=null;
         }
-        fast.next=head;
-        head=slow.next;
-        slow.next=null;
-
         return head;
     }
 }
