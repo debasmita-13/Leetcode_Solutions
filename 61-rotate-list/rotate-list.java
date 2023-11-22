@@ -26,7 +26,7 @@ class Solution {
 
     }
     public ListNode rotateRight(ListNode head, int k) {
-        if(head==null || head.next==null)
+        if(head==null || head.next==null || k==0)
             return head;
         int n=0;
         ListNode temp = head;
@@ -37,20 +37,21 @@ class Solution {
         }
         k %= n;
         
-        ListNode prev = head;
-        ListNode cur = head.next;
-        while(k!=0 && cur!=null)
-        {
-            if(cur.next==null)
-            {
-                cur.next = head;
-                prev.next = null;
-                head = cur;
-                k--;
-            }
-            prev = cur;
-            cur = cur.next;
+        ListNode fast=head,slow=head;
+        while(k!=0){
+           fast=fast.next;
+            k--;
         }
+            
+        
+        while(fast.next!=null){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        fast.next=head;
+        head=slow.next;
+        slow.next=null;
+
         return head;
     }
 }
