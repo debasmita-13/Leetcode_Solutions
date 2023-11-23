@@ -10,23 +10,23 @@
  */
 class Solution {
     public ListNode[] splitListToParts(ListNode head, int k) {
-        ListNode temp = head;
+        ListNode cur = head;
         int n = 0;
-        while(temp!=null)
+        while(cur!=null)
         {
             n++;
-            temp= temp.next;
+            cur= cur.next;
         }
         
         ListNode arr[] = new ListNode[k];
         int len = n/k, extra = n%k;
         
-        ListNode prev = null;
-        ListNode cur = head;
-        for(int i=0; i<k && (cur!=null); i++, extra--)
+        ListNode prev = null;cur = head;
+
+        for(int i=0; i<k && (cur!=null); i++)
         {
             arr[i] = cur;
-            for(int j=0; j<len+(extra>0?1:0) && (cur!=null); j++)
+            for(int j=0; j<len+(i<extra?1:0) && (cur!=null); j++)
             {
                 prev = cur;
                 cur = cur.next;
