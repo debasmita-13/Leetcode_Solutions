@@ -4,23 +4,23 @@ class Solution {
         if(nums.length == 0)
             return 0;
 
-        int incr=1, decr=1, res=1;
-        for(int i=1; i<nums.length; i++){
-            if(nums[i-1]<nums[i])
+        int asc=1, desc=1, longest=1;
+        for(int i=0; i<nums.length-1; i++){
+            if(nums[i+1]>nums[i])
             {
-                incr++;   decr = 1;
+                asc++;   desc = 1;
             }
-            else if(nums[i-1]>nums[i])
+            else if(nums[i+1]<nums[i])
             {
-                incr = 1;   decr++;
+                asc = 1;   desc++;
             }
             else
             {
-                incr = 1;   decr = 1;
+                asc = 1;   desc = 1;
             }
-            res = Math.max(res, Math.max(incr,decr));
+            longest = Math.max(longest, Math.max(asc,desc));
         }
 
-        return res;
+        return longest;
     }
 }
